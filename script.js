@@ -1,8 +1,5 @@
-console.log("Hello World!");
-
 function getComputerChoice() {
     randNumber = Math.random();
-    console.log(randNumber);
     if (randNumber > 0 & randNumber < 0.33) {
         return "rock";
     }
@@ -25,6 +22,55 @@ function getHumanChoice() {
     }
 };
 
-getHumanChoice();
+let humanScore = 0;
+let computerScore = 0;
 
-console.log(getComputerChoice());
+function playRound(humanChoice, computerChoice) {
+    if (humanChoice === "rock" & computerChoice === "paper") {
+        console.log("You lose! Paper beats Rock.");
+        computerScore +=1;
+    }
+    else if (humanChoice === "rock" & computerChoice === "scissors") {
+        console.log("You win! Rock beats Scissors.");
+        humanScore +=1;
+    }
+    else if (humanChoice === "rock" & computerChoice === "rock") {
+        console.log("Tie game!")
+    }
+    else if (humanChoice === "paper" & computerChoice === "paper") {
+        console.log("Tie game!")
+    }
+    else if (humanChoice === "paper" & computerChoice === "rock") {
+        console.log("You win! Paper beats Rock.");
+        humanScore +=1;
+    }
+    else if (humanChoice === "paper" & computerChoice === "scissors") {
+        console.log("You lose! Scissors beats Paper.");
+        computerScore +=1;
+    }
+    else if (humanChoice === "scissors" & computerChoice === "paper") {
+        console.log("You win! Scissors beats Paper.");
+        humanScore +=1;
+    }
+    else if (humanChoice === "scissors" & computerChoice === "rock") {
+        console.log("You lose! Rock beats Scissors.");
+        computerScore +=1;
+    }
+    else if (humanChoice === "scissors" & computerChoice === "scissors") {
+        console.log("Tie game!")
+    };
+};
+
+
+
+function playGame() {
+    for (let i = 1; i <= 5; i++) {
+        let humanSelection = getHumanChoice();
+        let computerSelection = getComputerChoice();
+        playRound(humanSelection, computerSelection);
+        console.log("Human score:" + humanScore);
+        console.log("Computer score:" + computerScore)
+    }
+};
+
+playGame();
