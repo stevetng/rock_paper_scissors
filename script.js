@@ -25,52 +25,73 @@ function getHumanChoice() {
 let humanScore = 0;
 let computerScore = 0;
 
+let gameResults = document.querySelector("#gameResults");
+
 function playRound(humanChoice, computerChoice) {
+    gameResults.innerHTML = "";
     if (humanChoice === "rock" & computerChoice === "paper") {
-        console.log("You lose! Paper beats Rock.");
+        gameResults.appendChild(document.createTextNode("You lose! Paper beats Rock."))
         computerScore +=1;
     }
     else if (humanChoice === "rock" & computerChoice === "scissors") {
-        console.log("You win! Rock beats Scissors.");
+        gameResults.appendChild(document.createTextNode("You win! Rock beats Scissors."));
         humanScore +=1;
     }
     else if (humanChoice === "rock" & computerChoice === "rock") {
-        console.log("Tie game!")
+        gameResults.appendChild(document.createTextNode("Tie game!"));
     }
     else if (humanChoice === "paper" & computerChoice === "paper") {
-        console.log("Tie game!")
+        gameResults.appendChild(document.createTextNode("Tie game!"));
     }
     else if (humanChoice === "paper" & computerChoice === "rock") {
-        console.log("You win! Paper beats Rock.");
+        gameResults.appendChild(document.createTextNode("You win! Paper beats Rock."));
         humanScore +=1;
     }
     else if (humanChoice === "paper" & computerChoice === "scissors") {
-        console.log("You lose! Scissors beats Paper.");
+        gameResults.appendChild(document.createTextNode("You lose! Scissors beats Paper."));
         computerScore +=1;
     }
     else if (humanChoice === "scissors" & computerChoice === "paper") {
-        console.log("You win! Scissors beats Paper.");
+        gameResults.appendChild(document.createTextNode("You win! Scissors beats Paper."));
         humanScore +=1;
     }
     else if (humanChoice === "scissors" & computerChoice === "rock") {
-        console.log("You lose! Rock beats Scissors.");
+        gameResults.appendChild(document.createTextNode("You lose! Rock beats Scissors."));
         computerScore +=1;
     }
     else if (humanChoice === "scissors" & computerChoice === "scissors") {
-        console.log("Tie game!")
+        gameResults.appendChild(document.createTextNode("Tie game!"))
     };
 };
 
+let userButtons = document.querySelectorAll("#gameOptions button");
+
+let scoreDisplay = document.querySelector("#displayScore");
+
+userButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        const playerSelection = button.textContent.toLowerCase();
+        const computerSelection = getComputerChoice()
+        playRound(playerSelection, computerSelection);
+        scoreDisplay.innerHTML = "Human score: " + humanScore + "\n" + "Computer score: " + computerScore;
+        if (humanScore === 5) {
+            scoreDisplay.innerHTML += "\n You won!";
+        };
+        if (computerScore === 5) {
+            scoreDisplay.innerHTML += "\n The computer won!";
+        };
+    });
+});
 
 
-function playGame() {
-    for (let i = 1; i <= 5; i++) {
-        let humanSelection = getHumanChoice();
-        let computerSelection = getComputerChoice();
-        playRound(humanSelection, computerSelection);
-        console.log("Human score:" + humanScore);
-        console.log("Computer score:" + computerScore)
-    }
-};
+// function playGame() {
+//     for (let i = 1; i <= 5; i++) {
+//         let humanSelection = getHumanChoice();
+//         let computerSelection = getComputerChoice();
+//         playRound(humanSelection, computerSelection);
+//         console.log("Human score:" + humanScore);
+//         console.log("Computer score:" + computerScore)
+//     }
+// };
 
 playGame();
